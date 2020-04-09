@@ -52,4 +52,10 @@ public class ParkingLotTest {
         Car car = this.parkingBoy.fetch(null);
         assertNull(car);
     }
+
+    @Test
+    public void should_not_fetch_car_when_not_give_ticket() {
+        Car car = this.parkingBoy.fetch();
+        assertNull(car);
+    }
 }
