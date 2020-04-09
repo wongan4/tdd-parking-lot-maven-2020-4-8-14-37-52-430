@@ -58,4 +58,25 @@ public class ParkingLotTest {
         Car car = this.parkingBoy.fetch();
         assertNull(car);
     }
+
+    @Test
+    public void should_not_fetch_car_when_give_used_ticket() {
+        ParkingTicket ticket = this.parkingBoy.park(car1);
+        Car obtainedCar = this.parkingBoy.fetch(ticket);
+        ParkingTicket usedTicket = new ParkingTicket();
+        usedTicket.decreaseUsageCount(1);
+
+        assertNull(this.parkingBoy.fetch(ticket));
+        assertNull(this.parkingBoy.fetch(usedTicket));
+    }
+
+    @Test
+    public void should_not_fetch_car_when_parking_lot_is_full() {
+        ParkingLot smallParkingLot = new ParkingLot(1);
+        ParkingBoy parkingBoyOnSmallLot = new ParkingBoy(smallParkingLot);
+        ParkingTicket parkingTicket1 = parkingBoyOnSmallLot.park(car1);
+        ParkingTicket parkingTicket2 = parkingBoyOnSmallLot.park(car2);
+
+        assertNull(parkingTicket2);
+    }
 }

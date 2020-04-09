@@ -8,12 +8,16 @@ public class ParkingBoy {
     }
 
     public ParkingTicket park(Car car) {
+        if (this.parkingLot.getCapacity() == 0) {
+            System.out.println("Cannot park car because parking lot is full");
+            return null;
+        }
         return this.parkingLot.park(car);
     }
 
     public Car fetch(ParkingTicket parkingTicket) {
-        if (parkingTicket == null) {
-            System.out.println("Cannot fetch car because customer provide a null ticket");
+        if (parkingTicket == null || parkingTicket.isUsed()) {
+            System.out.println("Cannot fetch car because customer provide a invalid ticket");
             return null;
         }
         return this.parkingLot.getCarByTicket(parkingTicket);
