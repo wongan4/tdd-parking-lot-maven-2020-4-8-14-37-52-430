@@ -46,4 +46,10 @@ public class ParkingLotTest {
         assertEquals(car2, obtainedCar2);
         assertNotEquals(obtainedCar1, obtainedCar2);
     }
+
+    @Test
+    public void should_not_fetch_car_when_give_wrong_ticket() {
+        Car car = this.parkingBoy.fetch(null);
+        assertNull(car);
+    }
 }
