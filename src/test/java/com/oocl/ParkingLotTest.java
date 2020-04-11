@@ -70,6 +70,8 @@ public class ParkingLotTest {
 
     @Test
     public void should_not_fetch_car_when_parking_lot_is_full() {
+        expectedException.expect(NotEnoughPositionException.class);
+        expectedException.expectMessage("Not enough position");
         ParkingLot smallParkingLot = new ParkingLot(1);
         ParkingBoy parkingBoyOnSmallLot = new ParkingBoy(smallParkingLot);
         ParkingTicket parkingTicket1 = parkingBoyOnSmallLot.park(car1);

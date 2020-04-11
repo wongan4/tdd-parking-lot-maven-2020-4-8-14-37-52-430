@@ -1,6 +1,8 @@
 package com.oocl;
 
 public class ParkingBoy {
+    private static final String NOT_ENOUGH_SPACE_EXCEPTION_MESSAGE = "Not enough position";
+
     private ParkingLot parkingLot;
 
     public ParkingBoy(ParkingLot parkingLot) {
@@ -9,7 +11,7 @@ public class ParkingBoy {
 
     public ParkingTicket park(Car car) throws NotEnoughPositionException {
         if (this.parkingLot.getCapacity() == 0) {
-            throw new NotEnoughPositionException("Not enough position");
+            throw new NotEnoughPositionException(NOT_ENOUGH_SPACE_EXCEPTION_MESSAGE);
         }
         return this.parkingLot.park(car);
     }
