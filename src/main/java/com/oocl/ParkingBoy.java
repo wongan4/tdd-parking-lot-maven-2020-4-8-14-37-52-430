@@ -7,24 +7,15 @@ public class ParkingBoy {
         this.parkingLot = parkingLot;
     }
 
-    public ParkingTicket park(Car car) {
+    public ParkingTicket park(Car car) throws NotEnoughPositionException {
         if (this.parkingLot.getCapacity() == 0) {
-            System.out.println("Cannot park car because parking lot is full");
-            return null;
+            throw new NotEnoughPositionException("Not enough position");
         }
         return this.parkingLot.park(car);
     }
 
-    public Car fetch(ParkingTicket parkingTicket) {
-        if (parkingTicket == null || parkingTicket.isUsed()) {
-            System.out.println("Cannot fetch car because customer provide a invalid ticket");
-            return null;
-        }
+    public Car fetch(ParkingTicket parkingTicket) throws UnrecognizedTicketException, NotProvideTicketException{
+        this.parkingLot.validateTicket(parkingTicket);
         return this.parkingLot.getCarByTicket(parkingTicket);
-    }
-
-    public Car fetch() {
-        System.out.println("Cannot fetch car because customer fails to provide a ticket");
-        return null;
     }
 }

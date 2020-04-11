@@ -1,7 +1,9 @@
 package com.oocl;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import static org.junit.Assert.*;
 
@@ -19,6 +21,9 @@ public class ParkingLotTest {
         this.car1 = new Car(1);
         this.car2 = new Car(2);
     }
+
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
 
     @Test
     public void should_return_ticket_when_park_car() {
@@ -48,26 +53,19 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void should_not_fetch_car_when_give_wrong_ticket() {
+    public void should_not_fetch_car_when_not_provide_ticket() {
+        expectedException.expect(NotProvideTicketException.class);
+        expectedException.expectMessage("Please provide your parking ticket.");
         Car car = this.parkingBoy.fetch(null);
-        assertNull(car);
-    }
-
-    @Test
-    public void should_not_fetch_car_when_not_give_ticket() {
-        Car car = this.parkingBoy.fetch();
-        assertNull(car);
     }
 
     @Test
     public void should_not_fetch_car_when_give_used_ticket() {
+        expectedException.expect(UnrecognizedTicketException.class);
+        expectedException.expectMessage("Unrecognized parking ticket.");
         ParkingTicket ticket = this.parkingBoy.park(car1);
-        Car obtainedCar = this.parkingBoy.fetch(ticket);
-        ParkingTicket usedTicket = new ParkingTicket();
-        usedTicket.decreaseUsageCount(1);
-
-        assertNull(this.parkingBoy.fetch(ticket));
-        assertNull(this.parkingBoy.fetch(usedTicket));
+        this.parkingBoy.fetch(ticket);
+        this.parkingBoy.fetch(ticket);
     }
 
     @Test
@@ -77,6 +75,7 @@ public class ParkingLotTest {
         ParkingTicket parkingTicket1 = parkingBoyOnSmallLot.park(car1);
         ParkingTicket parkingTicket2 = parkingBoyOnSmallLot.park(car2);
 
+        assertNotNull(parkingTicket1);
         assertNull(parkingTicket2);
     }
 }
