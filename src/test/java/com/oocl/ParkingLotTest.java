@@ -5,6 +5,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 public class ParkingLotTest {
@@ -17,7 +19,8 @@ public class ParkingLotTest {
     @Before
     public void setup() {
         this.parkingLot = new ParkingLot(10);
-        this.parkingBoy = new ParkingBoy(parkingLot);
+        this.parkingBoy = new ParkingBoy();
+        this.parkingBoy.addParkingLot(this.parkingLot);
         this.car1 = new Car(1);
         this.car2 = new Car(2);
     }
@@ -33,7 +36,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void should_return_car_when_give_ticket() {
+    public void should_return_car_when_give_ticket() throws UnmanagedTicketException {
         ParkingTicket parkingTicket = this.parkingBoy.park(car1);
         Car car = this.parkingBoy.fetch(parkingTicket);
 
@@ -41,7 +44,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void should_fetch_right_car_when_give_corresponding_ticket() {
+    public void should_fetch_right_car_when_give_corresponding_ticket() throws UnmanagedTicketException {
         ParkingTicket parkingTicket1 = this.parkingBoy.park(car1);
         ParkingTicket parkingTicket2 = this.parkingBoy.park(car2);
         Car obtainedCar1 = this.parkingBoy.fetch(parkingTicket1);
@@ -53,16 +56,16 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void should_not_fetch_car_when_not_provide_ticket() {
+    public void should_not_fetch_car_when_not_provide_ticket() throws UnmanagedTicketException {
         expectedException.expect(NotProvideTicketException.class);
-        expectedException.expectMessage("Please provide your parking ticket.");
+        expectedException.expectMessage(ParkingBoy.NOT_PROVIDE_TICKET_EXCEPTION_MESSAGE);
         Car car = this.parkingBoy.fetch(null);
     }
 
     @Test
-    public void should_not_fetch_car_when_give_used_ticket() {
+    public void should_not_fetch_car_when_give_used_ticket() throws UnmanagedTicketException {
         expectedException.expect(UnrecognizedTicketException.class);
-        expectedException.expectMessage("Unrecognized parking ticket.");
+        expectedException.expectMessage(ParkingLot.UNRECOGNIZED_TICKET_EXCEPTION_MESSAGE);
         ParkingTicket ticket = this.parkingBoy.park(car1);
         this.parkingBoy.fetch(ticket);
         this.parkingBoy.fetch(ticket);
@@ -71,9 +74,10 @@ public class ParkingLotTest {
     @Test
     public void should_not_fetch_car_when_parking_lot_is_full() {
         expectedException.expect(NotEnoughPositionException.class);
-        expectedException.expectMessage("Not enough position");
+        expectedException.expectMessage(ParkingBoy.NOT_ENOUGH_POSITION_EXCEPTION_MESSAGE);
         ParkingLot smallParkingLot = new ParkingLot(1);
-        ParkingBoy parkingBoyOnSmallLot = new ParkingBoy(smallParkingLot);
+        ParkingBoy parkingBoyOnSmallLot = new ParkingBoy();
+        parkingBoyOnSmallLot.addParkingLot(smallParkingLot);
         ParkingTicket parkingTicket1 = parkingBoyOnSmallLot.park(car1);
         ParkingTicket parkingTicket2 = parkingBoyOnSmallLot.park(car2);
 

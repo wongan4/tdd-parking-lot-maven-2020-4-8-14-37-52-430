@@ -4,8 +4,7 @@ import java.util.HashMap;
 
 public class ParkingLot {
     private static final int DEFAULT_CAPACITY = 10;
-    private static final String NOT_PROVIDE_TICKET_EXCEPTION_MESSAGE = "Please provide your parking ticket.";
-    private static final String UNRECOGNIZED_TICKET_EXCEPTION_MESSAGE = "Unrecognized parking ticket.";
+    public static final String UNRECOGNIZED_TICKET_EXCEPTION_MESSAGE = "Unrecognized parking ticket.";
 
     private int capacity;
     private HashMap<ParkingTicket, Car> ticketToCarMap;
@@ -25,7 +24,7 @@ public class ParkingLot {
     }
 
     public ParkingTicket park(Car car) {
-        ParkingTicket parkingTicket = new ParkingTicket();
+        ParkingTicket parkingTicket = new ParkingTicket(this);
         this.ticketToCarMap.put(parkingTicket, car);
         this.capacity -= 1;
         return parkingTicket;
@@ -37,10 +36,7 @@ public class ParkingLot {
         return car;
     }
 
-    public void validateTicket(ParkingTicket parkingTicket) throws UnrecognizedTicketException, NotProvideTicketException{
-        if (parkingTicket == null) {
-            throw new NotProvideTicketException(NOT_PROVIDE_TICKET_EXCEPTION_MESSAGE);
-        }
+    public void validateTicket(ParkingTicket parkingTicket) throws UnrecognizedTicketException{
         if (!ticketToCarMap.containsKey(parkingTicket)) {
             throw new UnrecognizedTicketException(UNRECOGNIZED_TICKET_EXCEPTION_MESSAGE);
         }
