@@ -12,16 +12,16 @@ public class ParkingBoy {
 
     protected List<ParkingLot> managedParkingLots;
 
-    public ParkingBoy(List<ParkingLot> managedParkingLots) {
-        this.managedParkingLots = managedParkingLots;
-    }
-
     public ParkingBoy() {
         this.managedParkingLots = new ArrayList<ParkingLot>();
     }
 
-    public void addParkingLot (ParkingLot parkingLot) {
+    public void addParkingLot(ParkingLot parkingLot) {
         this.managedParkingLots.add(parkingLot);
+    }
+
+    public void removeParkingLot(ParkingLot parkingLot) {
+        this.managedParkingLots.remove(parkingLot);
     }
 
     protected ParkingLot findAvailableParkingLot() {

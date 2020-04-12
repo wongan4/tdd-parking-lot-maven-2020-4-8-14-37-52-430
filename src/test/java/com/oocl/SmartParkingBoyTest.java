@@ -10,8 +10,6 @@ import static org.junit.Assert.*;
 public class SmartParkingBoyTest {
     private ParkingLot parkingLot;
     private SmartParkingBoy smartParkingBoy;
-    private Car car1;
-    private Car car2;
 
     @Before
     public void setup() {

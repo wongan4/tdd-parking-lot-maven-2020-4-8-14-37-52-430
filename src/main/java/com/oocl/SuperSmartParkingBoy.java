@@ -8,7 +8,7 @@ public class SuperSmartParkingBoy extends ParkingBoy {
     protected ParkingLot findAvailableParkingLot() {
         Optional<ParkingLot> availableParkingLot = this.managedParkingLots.stream()
                 .filter(parkingLot -> parkingLot.getCurrentCapacity() > 0)
-                .max(Comparator.comparing(ParkingLot::getCurrentCapacity));
+                .max(Comparator.comparing(ParkingLot::getAvailablePositionRate));
         return availableParkingLot.orElse(null);
     }
 }

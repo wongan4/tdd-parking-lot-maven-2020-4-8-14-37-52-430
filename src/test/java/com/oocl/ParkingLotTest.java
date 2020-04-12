@@ -18,7 +18,7 @@ public class ParkingLotTest {
 
     @Before
     public void setup() {
-        this.parkingLot = new ParkingLot(10);
+        this.parkingLot = new ParkingLot();
         this.parkingBoy = new ParkingBoy();
         this.parkingBoy.addParkingLot(this.parkingLot);
         this.car1 = new Car(1);
