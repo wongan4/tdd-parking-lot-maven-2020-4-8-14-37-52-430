@@ -9,7 +9,7 @@ public class ParkingBoy {
     public static final String UNMANAGED_TICKET_EXCEPTION = "Ticket is not managed by this parking boy.";
     public static final String NOT_PROVIDE_TICKET_EXCEPTION_MESSAGE = "Please provide your parking ticket.";
 
-    private List<ParkingLot> managedParkingLots;
+    protected List<ParkingLot> managedParkingLots;
 
     public ParkingBoy(List<ParkingLot> managedParkingLots) {
         this.managedParkingLots = managedParkingLots;
@@ -23,7 +23,7 @@ public class ParkingBoy {
         this.managedParkingLots.add(parkingLot);
     }
 
-    private ParkingLot findAvailableParkingLot() {
+    protected ParkingLot findAvailableParkingLot() {
         Optional<ParkingLot> availableParkingLot =
                 this.managedParkingLots.stream().filter(parkingLot -> parkingLot.getCapacity() > 0).findFirst();
         return availableParkingLot.orElse(null);
