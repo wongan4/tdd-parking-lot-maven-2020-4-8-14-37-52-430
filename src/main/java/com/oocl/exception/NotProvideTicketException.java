@@ -1,4 +1,4 @@
-package com.oocl;
+package com.oocl.exception;
 
 public class NotProvideTicketException extends RuntimeException {
 

@@ -1,5 +1,9 @@
 package com.oocl;
 
+import com.oocl.exception.NotEnoughPositionException;
+import com.oocl.exception.NotProvideTicketException;
+import com.oocl.exception.UnmanagedTicketException;
+import com.oocl.exception.UnrecognizedTicketException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

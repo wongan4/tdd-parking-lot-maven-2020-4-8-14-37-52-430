@@ -1,22 +1,24 @@
 package com.oocl;
 
+import com.oocl.exception.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class ParkingBoy {
 
-    protected List<ParkingLot> managedParkingLots;
+    List<ParkingLot> managedParkingLots;
 
-    public ParkingBoy() {
-        this.managedParkingLots = new ArrayList<ParkingLot>();
+    ParkingBoy() {
+        this.managedParkingLots = new ArrayList<>();
     }
 
-    public void addParkingLot(ParkingLot parkingLot) {
+    void addParkingLot(ParkingLot parkingLot) {
         this.managedParkingLots.add(parkingLot);
     }
 
-    public void removeParkingLot(ParkingLot parkingLot) {
+    void removeParkingLot(ParkingLot parkingLot) {
         this.managedParkingLots.remove(parkingLot);
     }
 
@@ -28,7 +30,7 @@ public class ParkingBoy {
         return availableParkingLot.orElse(null);
     }
 
-    public ParkingTicket park(Car car) throws NotEnoughPositionException {
+    ParkingTicket park(Car car) throws NotEnoughPositionException {
         ParkingLot availableParkingLot = this.findAvailableParkingLot();
 
         if (availableParkingLot == null) {
@@ -37,7 +39,7 @@ public class ParkingBoy {
         return availableParkingLot.park(car);
     }
 
-    public ParkingTicket parkTo(Car car, ParkingLot desiredParkingLot)
+    ParkingTicket parkTo(Car car, ParkingLot desiredParkingLot)
             throws UnmanagedParkingLogException, NotEnoughPositionException{
         if (!this.managedParkingLots.contains(desiredParkingLot)) {
             throw new UnmanagedParkingLogException();
@@ -48,7 +50,7 @@ public class ParkingBoy {
         return desiredParkingLot.park(car);
     }
 
-    public Car fetch(ParkingTicket parkingTicket)
+    Car fetch(ParkingTicket parkingTicket)
             throws UnrecognizedTicketException, NotProvideTicketException, UnmanagedTicketException {
         if (parkingTicket == null) {
             throw new NotProvideTicketException();
