@@ -1,9 +1,9 @@
 package com.oocl;
 
-public class Car {
+class Car {
     private int id;
 
-    public Car(int id) {
+    Car(int id) {
         this.id = id;
     }
 }

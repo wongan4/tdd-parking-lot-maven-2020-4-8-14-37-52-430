@@ -1,13 +1,13 @@
 package com.oocl;
 
-public class ParkingTicket {
+class ParkingTicket {
     private final ParkingLot parkingLot;
 
-    public ParkingTicket(ParkingLot parkingLot) {
+    ParkingTicket(ParkingLot parkingLot) {
         this.parkingLot = parkingLot;
     }
 
-    public ParkingLot getParkingLot() {
+    ParkingLot getParkingLot() {
         return parkingLot;
     }
 }
