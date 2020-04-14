@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 public class ParkingLot {
     private static final int DEFAULT_CAPACITY = 10;
-    public static final String UNRECOGNIZED_TICKET_EXCEPTION_MESSAGE = "Unrecognized parking ticket.";
 
     private int currentCapacity;
     private int capacity;
@@ -13,13 +12,13 @@ public class ParkingLot {
     public ParkingLot(int capacity) {
         this.capacity = capacity;
         this.currentCapacity = capacity;
-        ticketToCarMap = new HashMap<ParkingTicket, Car>();
+        ticketToCarMap = new HashMap<>();
     }
 
     public ParkingLot() {
         this.capacity = DEFAULT_CAPACITY;
         this.currentCapacity = DEFAULT_CAPACITY;
-        ticketToCarMap = new HashMap<ParkingTicket, Car>();
+        ticketToCarMap = new HashMap<>();
     }
 
     public int getCurrentCapacity() {
@@ -46,7 +45,7 @@ public class ParkingLot {
 
     public void validateTicket(ParkingTicket parkingTicket) throws UnrecognizedTicketException{
         if (!ticketToCarMap.containsKey(parkingTicket)) {
-            throw new UnrecognizedTicketException(UNRECOGNIZED_TICKET_EXCEPTION_MESSAGE);
+            throw new UnrecognizedTicketException();
         }
     }
 }

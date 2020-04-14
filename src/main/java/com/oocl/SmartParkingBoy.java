@@ -3,7 +3,7 @@ package com.oocl;
 import java.util.Comparator;
 import java.util.Optional;
 
-public class SmartParkingBoy extends  ParkingBoy{
+public class SmartParkingBoy extends ParkingBoy {
     @Override
     protected ParkingLot findAvailableParkingLot() {
         Optional<ParkingLot> availableParkingLot = this.managedParkingLots.stream()

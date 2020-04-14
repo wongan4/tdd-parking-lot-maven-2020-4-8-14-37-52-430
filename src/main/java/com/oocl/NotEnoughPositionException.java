@@ -1,7 +1,9 @@
 package com.oocl;
 
 public class NotEnoughPositionException extends RuntimeException{
-    public NotEnoughPositionException(String message) {
-        super(message);
+    public static final String NOT_ENOUGH_POSITION_EXCEPTION_MESSAGE = "Not enough position";
+
+    public NotEnoughPositionException() {
+        super(NOT_ENOUGH_POSITION_EXCEPTION_MESSAGE);
     }
 }

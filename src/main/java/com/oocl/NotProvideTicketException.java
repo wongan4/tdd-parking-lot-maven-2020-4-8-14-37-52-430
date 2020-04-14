@@ -2,7 +2,9 @@ package com.oocl;
 
 public class NotProvideTicketException extends RuntimeException {
 
-    public NotProvideTicketException(String message) {
-        super(message);
+    public static final String NOT_PROVIDE_TICKET_EXCEPTION_MESSAGE = "Please provide your parking ticket.";
+
+    public NotProvideTicketException() {
+        super(NOT_PROVIDE_TICKET_EXCEPTION_MESSAGE);
     }
 }
