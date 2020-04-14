@@ -14,11 +14,11 @@ public class ParkingBoy {
         this.managedParkingLots = new ArrayList<>();
     }
 
-    void addParkingLot(ParkingLot parkingLot) {
+     void addParkingLot(ParkingLot parkingLot) {
         this.managedParkingLots.add(parkingLot);
     }
 
-    void removeParkingLot(ParkingLot parkingLot) {
+     void removeParkingLot(ParkingLot parkingLot) {
         this.managedParkingLots.remove(parkingLot);
     }
 
